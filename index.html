@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111"><link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon.svg"><meta name="apple-mobile-web-app-capable" content="yes">
+<title>Created Training</title><style>
+*{box-sizing:border-box}body{margin:0;background:#111;color:#eee;font:16px -apple-system,system-ui,sans-serif;padding-bottom:80px}
+header{padding:14px 16px;background:#1a1a1a;position:sticky;top:0;z-index:2}h1{margin:0;font-size:18px}.sub{color:#999;font-size:13px}
+main{padding:12px}.card{background:#1c1c1c;border-radius:12px;padding:12px;margin-bottom:12px}
+.tag{display:inline-block;padding:4px 10px;border-radius:8px;font-weight:700;color:#111}
+.max{background:#ef5350}.up{background:#fdd835}.de{background:#4fc3f7}.re{background:#81c784}.del{background:#9e9e9e}.off{background:#555;color:#eee}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:#1a1a1a;border-top:1px solid #333;padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;background:none;border:0;color:#aaa;padding:16px 0;font-size:14px}nav button.on{color:#fff;font-weight:700}
+button.b{background:#333;color:#fff;border:0;border-radius:10px;padding:12px 14px;font-size:15px;margin:3px}button.p{background:#c62828}
+input,textarea{background:#222;color:#fff;border:1px solid #444;border-radius:8px;padding:10px;font-size:16px}
+.ex{border-top:1px solid #2a2a2a;padding:10px 0}.ex b{display:block}.last{color:#8bc34a;font-size:12px}
+.set{display:flex;gap:6px;margin-top:6px;align-items:center}.set input{width:80px}
+label.chk{display:flex;align-items:center;gap:10px;padding:10px 0;font-size:16px}label.chk input{width:24px;height:24px}
+table{width:100%;border-collapse:collapse;font-size:12px}td,th{border:1px solid #333;padding:5px;text-align:center}
+.note{background:#3e2723;color:#ffcc80;padding:8px;border-radius:8px;font-size:13px;margin:6px 0}
+</style></head><body>
+<header><h1>Created Training — William McNeely</h1><div class="sub" id="hdr"></div></header><main id="app"></main>
+<nav><button data-v="today">Today</button><button data-v="week">Week</button><button data-v="cycle">Cycle</button><button data-v="hist">History</button><button data-v="set">Settings</button></nav>
+<script>
+const DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MAIN={0:0,1:1,3:2,4:3};// day -> cycle column
+const CYCLE=[
+['Max Effort Lower 1','DE/RE Upper 1','RE Lower 2','Max Effort Upper 2'],
+['Max Effort Lower 3','DE/RE Upper 3','DE Lower 1 Speed','Max Effort Upper 1'],
+['Max Effort Lower 2','DE/RE Upper 2','DE Lower 3 Speed','Max Effort Upper 3'],
+['Deload Lower','Deload Upper','Deload Lower','Max Effort Upper 2'],
+['Max Effort Lower 1','DE/RE Upper 1','DE Lower 2 Speed Plus','Max Effort Upper 2'],
+['Max Effort Lower 3','DE/RE Upper 3','DE Lower 1 Speed Plus','Max Effort Upper 1'],
+['Max Effort Lower 2','DE/RE Upper 2','DE Lower 3 Speed Plus','Max Effort Upper 3'],
+['Deload Lower','Deload Upper','Deload Lower','Deload Upper']];
+const W4NOTE='Your sheet lists Max Effort Upper 2 on Thursday of Week 4 (a deload week). Kept as written. You can swap it to Deload Upper in Settings.';
+const INTENS=['H','MH','L','H','MH','L','L'];
+const EXTRAS=[
+['AM: Explosive','Lower 1 (main)','Hot/Cold Plunge','Boxing/Calisthenics'],
+['AM: Upper 1 (main)','Midday: Upper (Home?)','PM: Explosive','PM: Acceleration Focused'],
+['Hot/Cold Plunge','Recovery Tempo','Sauna'],
+['AM: Lower 2 (main)','Extensive Tempo','Boxing/Calisthenics','Hot/Cold Plunge'],
+['AM: Upper 2 (main)','Extra Upper 2','Explosive','PM: Max Velocity Short Speed'],
+['Recovery Tempo','Sauna'],
+['Hot/Cold Plunge','Hike','Recovery Tempo']];
+const DAILY=['Warm-up','Sauna','Feet','Jaw','Vacuums','Neck Work','Practice daily skills (at respective tempos)'];
+const WARMUP=['Foam Rolling','Band Shoulder Circles','Hip Circles'];
+const EX={
+'Lower 1':['Squat','PC','Single Leg','Quad [SL or Lengthened]','Hip Flexion','Hamstrings','Calves','Spinal (Diagonal)'],
+'Lower 2':['Glutes [Med]','LegPress OR Split Squat','Deadlift [@]','Rotation','Quads','Hip Adduction','Ab Flexion/Brace','Ankle'],
+'Lower 3':['Glutes [Max]','Squat [@]','Deadlift','Hip Abduction','Reverse Ab Flexion','Spinal','Ab Flexion [Diagonals]','Hip [R]'],
+'Upper 1':['BenchPress','Row','Shoulder ER','Neck [LF]','Serratus (Iron-Cross)','Lateral Delts','Reverse EF','Triceps [M-S]','Wrist [E/F]','Crushing (Closed: Gripper)','Extensors'],
+'Upper 2':['Press','Pulls','BenchPress [@] (Iron-Cross)','Rear Delts','Neck [R]','Shoulder IR','Triceps [Press]','Biceps [L-M]','Wrist [rF/uF]','Crushing (Open: Rolling Thunder)','Extensors'],
+'Upper 3':['Incline','UpperBack','Chest','Lats [M-S]','Neck [F/E]','Front Delts','Traps','Biceps [M-S]','Triceps [L-M]','Wrist [S/P]','Pinching (Open: Hub)','Extensors'],
+'Speed':['Jump/Throw','Agility','Lateral Flexion','Skips','Hill Sprints','Parachute','Barefoot?','CARs','Capsule','Rotational','Linear','Movement'],
+'Explosive':['Jump','Olympic','Lower HITT: Jump Rope','Lower HITT: Ski Erg','Lower HITT: Short Sprint (HITTmill)','Upper HITT: Rower','Upper HITT: Boxing','Upper HITT: Bulgarian DB Complex','Upper HITT: Long Sprint','Upper HITT: PushUp/Burpee/Punch','Cardiac/VO2: Walking Pacer Test'],
+'HIIT':['Series','Intervals','Lower/Trunk','Boxing','Wrestling','Olympic','PushUp/Burpee/Punch','Sets: 80, 90, 100'],
+'Cardiac/VO2':['Walk','HiTT Mill','Pacer Test','Tempo Run','JumpRope','Watt Output Circuit'],
+'Hands/Feet':['Foot','Knee Rotation','10 Rounds','2 x 11','3 x 7 sec','2 x 11','3 Rounds','2 x 20 sec'],
+'Hike':['Explore'],
+'Deload':['Easy movement / reduced load version of the scheduled lift']};
+const DEF={start:'2026-10-11',w4swap:false,offset:0};
+let S=Object.assign({},DEF,JSON.parse(localStorage.ct_settings||'{}'));let LOG=JSON.parse(localStorage.ct_log||'{}');let view='today';let override=null;
+const save=()=>{localStorage.ct_settings=JSON.stringify(S);localStorage.ct_log=JSON.stringify(LOG)};
+function ymd(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function parse(s){const[a,b,c]=s.split('-');return new Date(a,b-1,c)}
+function infoFor(date){const st=parse(S.start);let days=Math.round((date-st)/864e5)+S.offset;const wk=((Math.floor(days/7)%8)+8)%8;const dow=date.getDay();
+ let sess=null;if(MAIN[dow]!=null){sess=CYCLE[wk][MAIN[dow]];if(wk==3&&dow==4&&S.w4swap)sess='Deload Upper';}return{wk:wk+1,dow,sess,date}}
+function cls(s){if(!s)return'off';if(/Deload/.test(s))return'del';if(/Max/.test(s))return'max';if(/Speed|DE Lower/.test(s))return'de';if(/^RE/.test(s))return're';if(/Upper/.test(s))return'up';return'off'}
+function block(s){const m=s.match(/(Lower|Upper) (\d)/);return m?m[1]+' '+m[2]:null}
+function exList(s){if(!s)return[];if(/Deload/.test(s))return EX.Deload;let l=[...(EX[block(s)]||[])];if(/Speed/.test(s))l=l.concat(EX.Speed.map(x=>'Speed: '+x));return l}
+function lastFor(name,before){const ks=Object.keys(LOG).filter(k=>k<before).sort().reverse();for(const k of ks){const e=LOG[k].ex&&LOG[k].ex[name];if(e&&e.sets.some(x=>x.w||x.r))return k+': '+e.sets.filter(x=>x.w||x.r).map(x=>x.w+'×'+x.r).join(', ')}return''}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function today(){const d=override||new Date();d.setHours(0,0,0,0);const I=infoFor(d);const key=ymd(d);const L=LOG[key]=LOG[key]||{sess:I.sess,wk:I.wk,ex:{},chk:{},notes:''};
+ let h=`<div class="card"><div class="sub">${DAYS[I.dow]} ${key} · Week ${I.wk} of 8 · Intensity ${INTENS[I.dow]}</div><h2 style="margin:8px 0"><span class="tag ${cls(I.sess)}">${I.sess||'No main session'}</span></h2>
+ ${I.wk==4&&I.dow==4&&!S.w4swap?`<div class="note">${W4NOTE}</div>`:''}
+ <button class="b" onclick="shift(-1)">◀ Prev day</button><button class="b" onclick="shift(1)">Next day ▶</button>${override?'<button class="b" onclick="override=null;render()">Back to today</button>':''}</div>`;
+ h+=`<div class="card"><b>Warm-up</b><div class="sub">${WARMUP.join(' · ')}</div></div>`;
+ const ex=exList(I.sess);if(ex.length){h+='<div class="card"><b>Exercises</b>';ex.forEach(n=>{const e=L.ex[n]=L.ex[n]||{sets:[{w:'',r:''},{w:'',r:''},{w:'',r:''}],n:''};const lt=lastFor(n,key);
+  h+=`<div class="ex"><b>${esc(n)}</b>${lt?`<div class="last">Last: ${esc(lt)}</div>`:''}`+e.sets.map((s,i)=>`<div class="set">${i+1}<input inputmode="decimal" placeholder="lb" value="${esc(s.w)}" oninput="setv('${key}',${JSON.stringify(n).replace(/"/g,'&quot;')},${i},'w',this.value)">×<input inputmode="numeric" placeholder="reps" value="${esc(s.r)}" oninput="setv('${key}',${JSON.stringify(n).replace(/"/g,'&quot;')},${i},'r',this.value)"></div>`).join('')+
+  `<button class="b" onclick="addset('${key}',${JSON.stringify(n).replace(/"/g,'&quot;')})">+ set</button></div>`});h+='</div>'}
+ h+='<div class="card"><b>Day extras</b>'+EXTRAS[I.dow].concat(DAILY).map(x=>`<label class="chk"><input type="checkbox" ${L.chk[x]?'checked':''} onchange="LOG['${key}'].chk['${x}']=this.checked;save()">${x}</label>`).join('')+'</div>';
+ h+=`<div class="card"><b>Notes</b><textarea style="width:100%;height:90px" oninput="LOG['${key}'].notes=this.value;save()">${esc(L.notes)}</textarea></div>`;return h}
+function setv(k,n,i,f,v){LOG[k].ex[n].sets[i][f]=v;save()}function addset(k,n){LOG[k].ex[n].sets.push({w:'',r:''});save();render()}
+function shift(n){const d=override||new Date();override=new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);render()}
+function week(){const t=new Date();t.setHours(0,0,0,0);const s=new Date(t);s.setDate(t.getDate()-t.getDay());const I=infoFor(t);let h=`<div class="card"><b>Week ${I.wk} of 8</b></div>`;
+ for(let i=0;i<7;i++){const d=new Date(s);d.setDate(s.getDate()+i);const J=infoFor(d);h+=`<div class="card" onclick="override=new Date(${d.getTime()});view='today';render()"><div class="sub">${DAYS[i]} ${ymd(d)} · ${INTENS[i]}${i==t.getDay()?' · TODAY':''}</div>${J.sess?`<span class="tag ${cls(J.sess)}">${J.sess}</span>`:''}<div class="sub">${EXTRAS[i].join(' · ')}</div></div>`}return h}
+function cycle(){const cur=infoFor(new Date()).wk;let h='<div class="card"><table><tr><th>Wk</th><th>Sun</th><th>Mon</th><th>Wed</th><th>Thu</th></tr>';
+ CYCLE.forEach((r,w)=>{h+=`<tr style="${w+1==cur?'outline:2px solid #fff':''}"><td>${w+1}</td>`+r.map((s,j)=>{if(w==3&&j==3&&S.w4swap)s='Deload Upper';return`<td class="${cls(s)}" style="color:#111">${s}</td>`}).join('')+'</tr>'});
+ return h+'<tr><td>9</td><td colspan=4>Back to Week 1</td></tr></table><div class="note">* Week 2 starts with Lower 3, then back to 1 on the next lower day (from your sheet). Week 1 Wednesday is RE Lower 2 (not DE).</div></div>'}
+function hist(){const ks=Object.keys(LOG).filter(k=>{const L=LOG[k];return L.notes||Object.values(L.chk||{}).some(Boolean)||Object.values(L.ex||{}).some(e=>e.sets.some(s=>s.w||s.r))}).sort().reverse();
+ if(!ks.length)return'<div class="card">No logged sessions yet.</div>';return ks.map(k=>{const L=LOG[k];return`<div class="card" onclick="override=parse('${k}');view='today';render()"><div class="sub">${k} · Week ${L.wk}</div><span class="tag ${cls(L.sess)}">${L.sess||'Extras'}</span>`+
+ Object.entries(L.ex).filter(([n,e])=>e.sets.some(s=>s.w||s.r)).map(([n,e])=>`<div class="sub">${esc(n)}: ${e.sets.filter(s=>s.w||s.r).map(s=>s.w+'×'+s.r).join(', ')}</div>`).join('')+(L.notes?`<div class="sub">📝 ${esc(L.notes)}</div>`:'')+'</div>'}).join('')}
+function settings(){return`<div class="card"><b>Cycle start date (Week 1 Sunday)</b><br><input type="date" value="${S.start}" onchange="S.start=this.value;save();render()"></div>
+<div class="card"><b>Manual adjust</b><div class="sub">Shift the cycle by days (current: ${S.offset})</div><button class="b" onclick="S.offset-=7;save();render()">−1 week</button><button class="b" onclick="S.offset+=7;save();render()">+1 week</button><button class="b" onclick="S.offset=0;save();render()">Reset</button></div>
+<div class="card"><label class="chk"><input type="checkbox" ${S.w4swap?'checked':''} onchange="S.w4swap=this.checked;save();render()">Week 4 Thursday → Deload Upper (sheet says Max Effort Upper 2)</label></div>
+<div class="card"><b>Backup</b><br><button class="b p" onclick="exp()">Export JSON</button><button class="b" onclick="document.getElementById('imp').click()">Import JSON</button><input type="file" id="imp" accept=".json" style="display:none" onchange="imp(this)"></div>`}
+function exp(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({settings:S,log:LOG},null,1)],{type:'application/json'}));a.download='training-log-'+ymd(new Date())+'.json';a.click()}
+function imp(el){const f=el.files[0];if(!f)return;f.text().then(t=>{const o=JSON.parse(t);if(o.log)LOG=Object.assign(LOG,o.log);if(o.settings)S=Object.assign(S,o.settings);save();alert('Imported');render()})}
+function render(){const I=infoFor(new Date());document.getElementById('hdr').textContent=`Week ${I.wk} of 8 · today: ${I.sess||'extras / recovery'}`;
+ document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v==view));
+ document.getElementById('app').innerHTML={today,week,cycle,hist,set:settings}[view]();save()}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{view=b.dataset.v;if(view!='today')override=null;render();scrollTo(0,0)});
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});render();
+</script></body></html>
