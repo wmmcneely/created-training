@@ -2,7 +2,9 @@
 <meta name="theme-color" content="#111"><link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon.svg"><meta name="apple-mobile-web-app-capable" content="yes">
 <title>Created Training</title><style>
 *{box-sizing:border-box}body{margin:0;background:#111;color:#eee;font:16px -apple-system,system-ui,sans-serif;padding-bottom:80px}
-header{padding:14px 16px;background:#1a1a1a;position:sticky;top:0;z-index:2}h1{margin:0;font-size:18px}.sub{color:#999;font-size:13px}
+header{padding:14px 16px;padding-top:calc(14px + env(safe-area-inset-top));background:#1a1a1a}
+.stick{position:sticky;top:0;z-index:3;padding-top:calc(12px + env(safe-area-inset-top));box-shadow:0 4px 10px #000a;border:1px solid #333}
+select{background:#222;color:#fff;border:1px solid #444;border-radius:8px;padding:10px;font-size:16px;width:100%;margin:6px 0}h1{margin:0;font-size:18px}.sub{color:#999;font-size:13px}
 main{padding:12px}.card{background:#1c1c1c;border-radius:12px;padding:12px;margin-bottom:12px}
 .tag{display:inline-block;padding:4px 10px;border-radius:8px;font-weight:700;color:#111}
 .max{background:#ef5350}.up{background:#fdd835}.de{background:#4fc3f7}.re{background:#81c784}.del{background:#9e9e9e}.off{background:#555;color:#eee}
@@ -62,15 +64,18 @@ const save=()=>{localStorage.ct_settings=JSON.stringify(S);localStorage.ct_log=J
 function ymd(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 function parse(s){const[a,b,c]=s.split('-');return new Date(a,b-1,c)}
 function infoFor(date){const st=parse(S.start);let days=Math.round((date-st)/864e5)+S.offset;const wk=((Math.floor(days/7)%8)+8)%8;const dow=date.getDay();
- let sess=null;if(MAIN[dow]!=null){sess=CYCLE[wk][MAIN[dow]];if(wk==3&&dow==4&&S.w4swap)sess='Deload Upper';}return{wk:wk+1,dow,sess,date}}
+ let sess=null;if(MAIN[dow]!=null){sess=CYCLE[wk][MAIN[dow]];if(wk==3&&dow==4&&S.w4swap)sess='Deload Upper';}const sched=sess;const k=ymd(date);const ov=S.ov&&k in S.ov;if(ov)sess=S.ov[k]||null;return{wk:wk+1,dow,sess,sched,ov,date}}
+const SESSIONS=[];['Max Effort','DE/RE','RE','DE','Deload'].forEach(t=>['Lower','Upper'].forEach(b=>{if(t=='Deload'){SESSIONS.push('Deload '+b);return}[1,2,3].forEach(n=>SESSIONS.push(t+' '+b+' '+n))}));[1,2,3].forEach(n=>{SESSIONS.push('DE Lower '+n+' Speed');SESSIONS.push('DE Lower '+n+' Speed Plus')});
+function setOv(k,v){S.ov=S.ov||{};if(v=='__reset')delete S.ov[k];else S.ov[k]=v==='__rest'?'':v;const L=LOG[k];if(L)L.sess=infoFor(parse(k)).sess;save();render()}
 function cls(s){if(!s)return'off';if(/Deload/.test(s))return'del';if(/Max/.test(s))return'max';if(/Speed|DE Lower/.test(s))return'de';if(/^RE/.test(s))return're';if(/Upper/.test(s))return'up';return'off'}
 function block(s){const m=s.match(/(Lower|Upper) (\d)/);return m?m[1]+' '+m[2]:null}
 function exList(s){if(!s)return[];if(/Deload/.test(s))return EX.Deload;let l=[...(EX[block(s)]||[])];if(/Speed/.test(s))l=l.concat(EX.Speed.map(x=>'Speed: '+x));return l}
 function lastFor(name,before){const ks=Object.keys(LOG).filter(k=>k<before).sort().reverse();for(const k of ks){const e=LOG[k].ex&&LOG[k].ex[name];if(e&&e.sets.some(x=>x.w||x.r))return k+': '+e.sets.filter(x=>x.w||x.r).map(x=>x.w+'×'+x.r).join(', ')}return''}
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
-function today(){const d=override||new Date();d.setHours(0,0,0,0);const I=infoFor(d);const key=ymd(d);const L=LOG[key]=LOG[key]||{sess:I.sess,wk:I.wk,ex:{},chk:{},notes:''};
- let h=`<div class="card"><div class="sub">${DAYS[I.dow]} ${key} · Week ${I.wk} of 8 · Intensity ${INTENS[I.dow]}</div><h2 style="margin:8px 0"><span class="tag ${cls(I.sess)}">${I.sess||'No main session'}</span></h2>
+function today(){const d=override||new Date();d.setHours(0,0,0,0);const I=infoFor(d);const key=ymd(d);const L=LOG[key]=LOG[key]||{sess:I.sess,wk:I.wk,ex:{},chk:{},notes:''};L.sess=I.sess;
+ let h=`<div class="card stick"><div class="sub">${DAYS[I.dow]} ${key} · Week ${I.wk} of 8 · Intensity ${INTENS[I.dow]}</div><h2 style="margin:8px 0"><span class="tag ${cls(I.sess)}">${I.sess||'No main session'}</span></h2>
  ${I.wk==4&&I.dow==4&&!S.w4swap?`<div class="note">${W4NOTE}</div>`:''}
+ <select id="sessSel" onchange="setOv('${key}',this.value)"><option value="__reset">↺ Scheduled: ${I.sched||'Rest/Extras only'}</option><option value="__rest" ${I.ov&&!I.sess?'selected':''}>Rest/Extras only</option>${SESSIONS.map(x=>`<option ${I.ov&&I.sess==x?'selected':''}>${x}</option>`).join('')}</select>${I.ov?'<div class="sub">Changed from scheduled: '+(I.sched||'Rest')+'</div>':''}
  <button class="b" onclick="shift(-1)">◀ Prev day</button><button class="b" onclick="shift(1)">Next day ▶</button>${override?'<button class="b" onclick="override=null;render()">Back to today</button>':''}</div>`;
  h+=`<div class="card"><b>Warm-up</b><div class="sub">${WARMUP.join(' · ')}</div></div>`;
  const ex=exList(I.sess);if(ex.length){h+='<div class="card"><b>Exercises</b>';ex.forEach(n=>{const e=L.ex[n]=L.ex[n]||{sets:[{w:'',r:''},{w:'',r:''},{w:'',r:''}],n:''};const lt=lastFor(n,key);
@@ -81,7 +86,7 @@ function today(){const d=override||new Date();d.setHours(0,0,0,0);const I=infoFo
 function setv(k,n,i,f,v){LOG[k].ex[n].sets[i][f]=v;save()}function addset(k,n){LOG[k].ex[n].sets.push({w:'',r:''});save();render()}
 function shift(n){const d=override||new Date();override=new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);render()}
 function week(){const t=new Date();t.setHours(0,0,0,0);const s=new Date(t);s.setDate(t.getDate()-t.getDay());const I=infoFor(t);let h=`<div class="card"><b>Week ${I.wk} of 8</b></div>`;
- for(let i=0;i<7;i++){const d=new Date(s);d.setDate(s.getDate()+i);const J=infoFor(d);h+=`<div class="card" onclick="override=new Date(${d.getTime()});view='today';render()"><div class="sub">${DAYS[i]} ${ymd(d)} · ${INTENS[i]}${i==t.getDay()?' · TODAY':''}</div>${J.sess?`<span class="tag ${cls(J.sess)}">${J.sess}</span>`:''}<div class="sub">${EXTRAS[i].join(' · ')}</div></div>`}return h}
+ for(let i=0;i<7;i++){const d=new Date(s);d.setDate(s.getDate()+i);const J=infoFor(d);h+=`<div class="card" onclick="override=new Date(${d.getTime()});view='today';render()"><div class="sub">${DAYS[i]} ${ymd(d)} · ${INTENS[i]}${i==t.getDay()?' · TODAY':''}</div>${J.sess?`<span class="tag ${cls(J.sess)}">${J.sess}</span>`:''}${J.ov?' <span class="sub">(changed)</span>':''}<div class="sub">${EXTRAS[i].join(' · ')}</div></div>`}return h}
 function cycle(){const cur=infoFor(new Date()).wk;let h='<div class="card"><table><tr><th>Wk</th><th>Sun</th><th>Mon</th><th>Wed</th><th>Thu</th></tr>';
  CYCLE.forEach((r,w)=>{h+=`<tr style="${w+1==cur?'outline:2px solid #fff':''}"><td>${w+1}</td>`+r.map((s,j)=>{if(w==3&&j==3&&S.w4swap)s='Deload Upper';return`<td class="${cls(s)}" style="color:#111">${s}</td>`}).join('')+'</tr>'});
  return h+'<tr><td>9</td><td colspan=4>Back to Week 1</td></tr></table><div class="note">* Week 2 starts with Lower 3, then back to 1 on the next lower day (from your sheet). Week 1 Wednesday is RE Lower 2 (not DE).</div></div>'}
