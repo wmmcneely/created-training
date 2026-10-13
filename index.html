@@ -109,5 +109,5 @@ function render(){const I=infoFor(new Date());document.getElementById('hdr').tex
  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v==view));
  document.getElementById('app').innerHTML={today,week,cycle,hist,set:settings}[view]();save()}
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{view=b.dataset.v;if(view!='today')override=null;render();scrollTo(0,0)});
-if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});render();
+if('serviceWorker'in navigator){navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});let _r=0;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!_r){_r=1;location.reload();}});}render();
 </script></body></html>
