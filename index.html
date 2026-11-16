@@ -18,8 +18,48 @@ label.chk{display:flex;align-items:center;gap:10px;padding:10px 0;font-size:16px
 table{width:100%;border-collapse:collapse;font-size:12px}td,th{border:1px solid #333;padding:5px;text-align:center}
 .pl{color:#ef5350}
 .note{background:#3e2723;color:#ffcc80;padding:8px;border-radius:8px;font-size:13px;margin:6px 0}
+a.floor{color:#B38234;font-weight:700;font-size:13px;text-decoration:none;display:inline-block;margin-top:8px}
+.note a{color:#ffcc80}
+.brandbar{display:flex;flex-direction:column}
+.brandbar .g{order:1;height:6px;background:#B38234}
+.brandbar .r{order:2;height:6px;background:#9F5F2C}
+.mg{background:#000;border-radius:12px;overflow:hidden;margin-bottom:12px;border:1px solid #2a2a2a}
+.mgbody{padding:16px 16px 18px}
+.mgtopline{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.mgword{font-weight:800;letter-spacing:.16em;font-size:13px}
+.mgid{font-weight:800;font-size:28px;letter-spacing:.04em;text-align:right}
+.mgid.ph{font-size:13px;letter-spacing:0;color:#B38234}
+.mgmeta{color:#ccc;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+.mgweb{margin:2px 0 14px;font-size:14px}
+.mgweb a,.more a{color:#B38234;text-decoration:none;font-weight:700}
+.mgbrandline{color:#B38234;font-weight:800;letter-spacing:.12em;font-size:13px}
+.mg h2{margin:4px 0 6px;font-size:30px;line-height:1.05}
+.aka{margin:0 0 14px;color:#B38234;font-size:18px}
+.muscles{margin:0 0 10px;font-size:18px;font-weight:700;line-height:1.25}
+.mlabel{display:block;color:#B38234;font-size:11px;letter-spacing:.14em;font-weight:800;margin-bottom:2px}
+.step{margin:8px 0 0;font-size:16px;line-height:1.35}
+.step b{display:block;color:#B38234;font-size:11px;letter-spacing:.14em;margin-bottom:2px}
+.caution{border-left:3px solid #9F5F2C;padding-left:10px}
+.poses{display:flex;gap:8px;margin-top:14px}
+.poses figure{flex:1;margin:0;background:#111;border-radius:8px;overflow:hidden}
+.poses img{width:100%;display:block}
+.poses figcaption{font-size:11px;letter-spacing:.14em;color:#B38234;padding:6px 8px;font-weight:800}
+.mgactions{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.mgb{display:block;width:100%;text-align:center;text-decoration:none;border-radius:10px;padding:14px;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer}
+.mgb.vid{background:transparent;color:#fff;border:2px solid #B38234}
+.mgb.log{background:#9F5F2C;color:#fff;border:0}
+.wipe{color:#888;font-size:12px;margin:12px 0 0}
+.more{margin:14px 0 0;font-size:14px}
+.paused{display:inline-block;background:#9F5F2C;color:#fff;font-weight:800;font-size:12px;letter-spacing:.06em;padding:4px 8px;border-radius:6px;margin:0 0 8px}
+.noid{color:#bbb;font-size:13px;margin:0 0 8px}
+.fsec{color:#B38234;font-size:12px;letter-spacing:.12em;font-weight:800;margin:16px 0 6px}
+.frow{display:block;background:#141414;border-radius:10px;padding:10px 12px;margin:0 0 8px;text-decoration:none;color:inherit}
+.frow .fid{color:#B38234;font-weight:800;font-size:12px}
+.frow b{display:block;font-size:16px;margin-top:2px}
+.frow.is-paused{opacity:.72}
+#fleetQ{width:100%;margin:8px 0 4px}
 </style></head><body>
-<header><h1>Created Training — William McNeely</h1><div class="sub" id="hdr"></div></header><main id="app"></main>
+<header><h1>Created Training — William McNeely</h1><div class="sub" id="hdr"></div><a class="floor" href="#/machines">Machines</a></header><main id="app"></main>
 <nav><button data-v="today">Today</button><button data-v="week">Week</button><button data-v="cycle">Cycle</button><button data-v="hist">History</button><button data-v="set">Settings</button></nav>
 <script>
 const DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -79,7 +119,7 @@ function pickVar(k,blk,n,el){const v=el.value;const e=LOG[k].ex[n];if(v=='__add'
  else if(v=='__del'){const c=(S.custom&&S.custom[n])||[];const x=prompt('Type the custom exercise to remove:\n'+c.join('\n'));if(x&&c.includes(x.trim())){S.custom[n]=c.filter(y=>y!=x.trim());if(e.v==x.trim())e.v=''}}else e.v=v;save();render()}
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function today(){const d=override||new Date();d.setHours(0,0,0,0);const I=infoFor(d);const key=ymd(d);const L=LOG[key]=LOG[key]||{sess:I.sess,wk:I.wk,ex:{},chk:{},notes:''};L.sess=I.sess;
- let h=`<div class="card stick"><div class="sub">${DAYS[I.dow]} ${key} · Week ${I.wk} of 8 · Intensity ${INTENS[I.dow]}</div><h2 style="margin:8px 0"><span class="tag ${cls(I.sess)}">${I.sess||'No main session'}</span></h2>
+ let h=fromMachineBanner()+`<div class="card stick"><div class="sub">${DAYS[I.dow]} ${key} · Week ${I.wk} of 8 · Intensity ${INTENS[I.dow]}</div><h2 style="margin:8px 0"><span class="tag ${cls(I.sess)}">${I.sess||'No main session'}</span></h2>
  ${I.wk==4&&I.dow==4&&!S.w4swap?`<div class="note">${W4NOTE}</div>`:''}
  <select id="sessSel" onchange="setOv('${key}',this.value)"><option value="__reset">↺ Scheduled: ${I.sched||'Rest/Extras only'}</option><option value="__rest" ${I.ov&&!I.sess?'selected':''}>Rest/Extras only</option>${SESSIONS.map(x=>`<option ${I.ov&&I.sess==x?'selected':''}>${x}</option>`).join('')}</select>${I.ov?'<div class="sub">Changed from scheduled: '+(I.sched||'Rest')+'</div>':''}
  <button class="b" onclick="shift(-1)">◀ Prev day</button><button class="b" onclick="shift(1)">Next day ▶</button>${override?'<button class="b" onclick="override=null;render()">Back to today</button>':''}</div>`;
@@ -92,12 +132,12 @@ function today(){const d=override||new Date();d.setHours(0,0,0,0);const I=infoFo
 function setv(k,n,i,f,v){LOG[k].ex[n].sets[i][f]=v;save()}function addset(k,n){LOG[k].ex[n].sets.push({w:'',r:''});save();render()}
 function shift(n){const d=override||new Date();override=new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);render()}
 function week(){const t=new Date();t.setHours(0,0,0,0);const s=new Date(t);s.setDate(t.getDate()-t.getDay());const I=infoFor(t);let h=`<div class="card"><b>Week ${I.wk} of 8</b></div>`;
- for(let i=0;i<7;i++){const d=new Date(s);d.setDate(s.getDate()+i);const J=infoFor(d);h+=`<div class="card" onclick="override=new Date(${d.getTime()});view='today';render()"><div class="sub">${DAYS[i]} ${ymd(d)} · ${INTENS[i]}${i==t.getDay()?' · TODAY':''}</div>${J.sess?`<span class="tag ${cls(J.sess)}">${J.sess}</span>`:''}${J.ov?' <span class="sub">(changed)</span>':''}<div class="sub">${EXTRAS[i].join(' · ')}</div></div>`}return h}
+ for(let i=0;i<7;i++){const d=new Date(s);d.setDate(s.getDate()+i);const J=infoFor(d);h+=`<div class="card" onclick="override=new Date(${d.getTime()});view='today';if(location.hash==='#/today')render();else location.hash='#/today'"><div class="sub">${DAYS[i]} ${ymd(d)} · ${INTENS[i]}${i==t.getDay()?' · TODAY':''}</div>${J.sess?`<span class="tag ${cls(J.sess)}">${J.sess}</span>`:''}${J.ov?' <span class="sub">(changed)</span>':''}<div class="sub">${EXTRAS[i].join(' · ')}</div></div>`}return h}
 function cycle(){const cur=infoFor(new Date()).wk;let h='<div class="card"><table><tr><th>Wk</th><th>Sun</th><th>Mon</th><th>Wed</th><th>Thu</th></tr>';
  CYCLE.forEach((r,w)=>{h+=`<tr style="${w+1==cur?'outline:2px solid #fff':''}"><td>${w+1}</td>`+r.map((s,j)=>{if(w==3&&j==3&&S.w4swap)s='Deload Upper';return`<td class="${cls(s)}" style="color:#111">${s}</td>`}).join('')+'</tr>'});
  return h+'<tr><td>9</td><td colspan=4>Back to Week 1</td></tr></table><div class="note">* Week 2 starts with Lower 3, then back to 1 on the next lower day (from your sheet). Week 1 Wednesday is RE Lower 2 (not DE).</div></div>'}
 function hist(){const ks=Object.keys(LOG).filter(k=>{const L=LOG[k];return L.notes||Object.values(L.chk||{}).some(Boolean)||Object.values(L.ex||{}).some(e=>e.sets.some(s=>s.w||s.r))}).sort().reverse();
- if(!ks.length)return'<div class="card">No logged sessions yet.</div>';return ks.map(k=>{const L=LOG[k];return`<div class="card" onclick="override=parse('${k}');view='today';render()"><div class="sub">${k} · Week ${L.wk}</div><span class="tag ${cls(L.sess)}">${L.sess||'Extras'}</span>`+
+ if(!ks.length)return'<div class="card">No logged sessions yet.</div>';return ks.map(k=>{const L=LOG[k];return`<div class="card" onclick="override=parse('${k}');view='today';if(location.hash==='#/today')render();else location.hash='#/today'"><div class="sub">${k} · Week ${L.wk}</div><span class="tag ${cls(L.sess)}">${L.sess||'Extras'}</span>`+
  Object.entries(L.ex).filter(([n,e])=>e.sets.some(s=>s.w||s.r)).map(([n,e])=>`<div class="sub">${esc(n)}${e.v?' — '+esc(e.v):''}: ${e.sets.filter(s=>s.w||s.r).map(s=>s.w+'×'+s.r).join(', ')}</div>`).join('')+(L.notes?`<div class="sub">📝 ${esc(L.notes)}</div>`:'')+'</div>'}).join('')}
 function settings(){return`<div class="card"><b>Cycle start date (Week 1 Sunday)</b><br><input type="date" value="${S.start}" onchange="S.start=this.value;save();render()"></div>
 <div class="card"><b>Manual adjust</b><div class="sub">Shift the cycle by days (current: ${S.offset})</div><button class="b" onclick="S.offset-=7;save();render()">−1 week</button><button class="b" onclick="S.offset+=7;save();render()">+1 week</button><button class="b" onclick="S.offset=0;save();render()">Reset</button></div>
@@ -105,9 +145,158 @@ function settings(){return`<div class="card"><b>Cycle start date (Week 1 Sunday)
 <div class="card"><b>Backup</b><br><button class="b p" onclick="exp()">Export JSON</button><button class="b" onclick="document.getElementById('imp').click()">Import JSON</button><input type="file" id="imp" accept=".json" style="display:none" onchange="imp(this)"></div>`}
 function exp(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({settings:S,log:LOG},null,1)],{type:'application/json'}));a.download='training-log-'+ymd(new Date())+'.json';a.click()}
 function imp(el){const f=el.files[0];if(!f)return;f.text().then(t=>{const o=JSON.parse(t);if(o.log)LOG=Object.assign(LOG,o.log);if(o.settings)S=Object.assign(S,o.settings);save();alert('Imported');render()})}
-function render(){const I=infoFor(new Date());document.getElementById('hdr').textContent=`Week ${I.wk} of 8 · today: ${I.sess||'extras / recovery'}`;
- document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v==view));
- document.getElementById('app').innerHTML={today,week,cycle,hist,set:settings}[view]();save()}
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{view=b.dataset.v;if(view!='today')override=null;render();scrollTo(0,0)});
-if('serviceWorker'in navigator){navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});let _r=0;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!_r){_r=1;location.reload();}});}render();
+let FLEET=null;
+let fleetQuery='';
+function gymInfo(){return{name:(FLEET&&FLEET.name)||'Created',website:(FLEET&&FLEET.website)||'www.created.center',location:(FLEET&&FLEET.location)||'24/7 Strength · Ozark, MO'}}
+function websiteHref(site){const w=site||'www.created.center';if(/^https?:\/\//i.test(w))return w;return 'https://'+w.replace(/^\/\//,'')}
+function safeHttp(url){try{const u=new URL(url);if(u.protocol==='https:'||u.protocol==='http:')return u.href}catch(e){}return ''}
+function safeImg(path){if(!path)return '';if(/^[A-Za-z0-9_./-]+$/.test(path)&&path.indexOf('..')===-1&&path.charAt(0)!=='/')return path;return safeHttp(path)}
+function findMachine(id){if(!FLEET||!FLEET.machines||!id)return null;const machines=FLEET.machines;if(machines[id])return machines[id];const want=String(id).trim().toUpperCase();const aliases=FLEET.aliases||{};let target=aliases[want];if(!target){for(const key of Object.keys(aliases)){if(key.toUpperCase()===want){target=aliases[key];break}}}if(target&&machines[target])return machines[target];if(machines[want])return machines[want];for(const key of Object.keys(machines)){if(key.toUpperCase()===want)return machines[key]}return null}
+function canonicalizeMachineHash(){if(!FLEET||!FLEET.machines)return;const raw=machineIdFromHash();if(!raw)return;const m=findMachine(raw);if(!m||raw===m.id)return;const params=new URLSearchParams(location.search);params.delete('m');const qs=params.toString();history.replaceState(null,'',location.pathname+(qs?'?'+qs:'')+'#/machine/'+encodeURIComponent(m.id))}
+function machineIdFromHash(){const m=(location.hash||'').match(/^#\/machine\/([^/?#]+)$/);return m?decodeURIComponent(m[1]):null}
+function akaLine(aka){if(!aka)return '';return aka.indexOf('"')===-1?'aka "'+esc(aka)+'"':'aka '+esc(aka)}
+function fromMachineBanner(){let id='';try{id=sessionStorage.getItem('ct_from_machine')||''}catch(e){}if(!id)return '';const m=findMachine(id);const label=m?((m.guide&&m.guide.aka)||m.nickname||m.equipment||m.id):id;const mid=m?m.id:id;return `<div class="note">From ${esc(mid)} · ${esc(label)}. <a href="#/machine/${encodeURIComponent(mid)}">Guide</a> <button class="b" type="button" onclick="clearFromMachine()">Dismiss</button></div>`}
+function clearFromMachine(){try{sessionStorage.removeItem('ct_from_machine')}catch(e){}render()}
+function openLog(id){try{sessionStorage.setItem('ct_from_machine',id)}catch(e){}view='today';if(location.hash==='#/today'){render();scrollTo(0,0)}else location.hash='#/today'}
+function machinePage(rawId){
+  if(!FLEET)return '<div class="card">Loading machine guide…</div>';
+  if(FLEET.error)return '<div class="card">The machine list did not load. Reopen this page when you have a signal.</div>';
+  const m=findMachine(rawId);
+  const site=gymInfo();
+  if(!m)return `<article class="mg"><div class="brandbar"><span class="g"></span><span class="r"></span></div><div class="mgbody"><p class="mgword">CREATED</p><h2>No machine ${esc(rawId)}</h2><p>That code is not on the floor list.</p><a class="mgb vid" href="#/machines">All machines</a></div></article>`;
+  const g=m.guide||{};
+  const title=g.title||m.equipment||m.createdName||'Machine';
+  const aka=g.aka||m.nickname||'';
+  const showAka=aka&&aka.toLowerCase()!==String(title).toLowerCase();
+  let brandLine=g.brandLine||(m.brand?String(m.brand).toUpperCase():'');
+  if(brandLine&&brandLine.toLowerCase()===String(title).toLowerCase())brandLine='';
+  const primary=g.primary||((!g.secondary)?(m.simplyPut||m.muscle||''):'');
+  const secondary=g.secondary||'';
+  const start=safeImg(g.startImage);
+  const finish=safeImg(g.finishImage);
+  const video=safeHttp(m.video);
+  const hasGuide=!!(g.title||g.primary||g.setup||g.movement||g.caution);
+  const parts=['<article class="mg"><div class="brandbar"><span class="g"></span><span class="r"></span></div><div class="mgbody">'];
+  parts.push(`<div class="mgtopline"><span class="mgword">CREATED</span><span class="mgid">${esc(m.id)}</span></div>`);
+  parts.push(`<div class="mgmeta">${esc(site.location)}</div>`);
+  parts.push(`<div class="mgweb"><a href="${esc(websiteHref(site.website))}" target="_blank" rel="noopener">${esc(site.website)}</a></div>`);
+  if(m.paused)parts.push('<div class="paused">Paused</div>');
+  if(brandLine)parts.push(`<div class="mgbrandline">${esc(brandLine)}</div>`);
+  parts.push(`<h2>${esc(title)}</h2>`);
+  if(showAka)parts.push(`<p class="aka">${akaLine(aka)}</p>`);
+  if(primary)parts.push(`<p class="muscles">${g.primary?'<span class="mlabel">PRIMARY</span>':''}${esc(primary)}</p>`);
+  if(secondary)parts.push(`<p class="muscles"><span class="mlabel">SECONDARY</span>${esc(secondary)}</p>`);
+  if(!g.primary&&!g.secondary&&m.movement)parts.push(`<p class="sub">${esc(m.movement)}</p>`);
+  if(g.setup)parts.push(`<div class="step"><b>SETUP</b>${esc(g.setup)}</div>`);
+  if(g.movement)parts.push(`<div class="step"><b>MOVEMENT</b>${esc(g.movement)}</div>`);
+  if(g.caution)parts.push(`<div class="step caution"><b>CAUTION</b>${esc(g.caution)}</div>`);
+  if(start||finish){
+    parts.push('<div class="poses">');
+    if(start)parts.push(`<figure><img alt="Start" src="${esc(start)}"><figcaption>START</figcaption></figure>`);
+    if(finish)parts.push(`<figure><img alt="Finish" src="${esc(finish)}"><figcaption>FINISH</figcaption></figure>`);
+    parts.push('</div>');
+  }
+  parts.push('<div class="mgactions">');
+  if(video)parts.push(`<a class="mgb vid" href="${esc(video)}" target="_blank" rel="noopener">Video demo</a>`);
+  parts.push(`<button class="mgb log" type="button" data-log="${esc(m.id)}">Log a set</button>`);
+  parts.push('</div>');
+  if(hasGuide)parts.push('<p class="wipe">Wipe down after use.</p>');
+  parts.push('<p class="more"><a href="#/machines">All machines</a></p>');
+  parts.push('</div></article>');
+  return parts.join('');
+}
+function onFleetQuery(el){fleetQuery=el.value;const list=document.getElementById('fleetList');if(list)list.innerHTML=fleetListHtml(fleetQuery)}
+function fleetListHtml(q){
+  const query=(q||'').trim().toLowerCase();
+  const machines=FLEET&&FLEET.machines?Object.values(FLEET.machines):[];
+  const groups=[];let current=null;let n=0;
+  for(const m of machines){
+    if(query){
+      const g=m.guide||{};
+      const hay=[m.id,m.legacyId,m.equipment,m.createdName,m.nickname,m.brand,m.muscle,m.movement,m.simplyPut,m.section,g.title,g.aka,g.primary,g.secondary].join('\n').toLowerCase();
+      if(hay.indexOf(query)===-1)continue;
+    }
+    n++;
+    if(!current||current.section!==m.section){current={section:m.section,items:[]};groups.push(current)}
+    const label=m.nickname||m.equipment||m.createdName||m.id;
+    const detail=[m.simplyPut||m.muscle,m.movement].filter(Boolean).join(' · ');
+    current.items.push(`<a class="frow${m.paused?' is-paused':''}" href="#/machine/${encodeURIComponent(m.id)}"><span class="fid">${esc(m.id)}${m.paused?' · Paused':''}</span><b>${esc(label)}</b>${detail?`<div class="sub">${esc(detail)}</div>`:''}</a>`);
+  }
+  if(!n)return '<p class="sub">No match.</p>';
+  return groups.map(g=>`<div class="fsec">${esc(g.section.toUpperCase())}</div>`+g.items.join('')).join('');
+}
+function fleetPage(){
+  if(!FLEET)return '<div class="card">Loading machines…</div>';
+  if(FLEET.error)return '<div class="card">The machine list did not load. Reopen this page when you have a signal.</div>';
+  const site=gymInfo();
+  const all=Object.values(FLEET.machines);
+  return `<article class="mg"><div class="brandbar"><span class="g"></span><span class="r"></span></div><div class="mgbody"><div class="mgword">CREATED</div><h2>Machines</h2><div class="sub">${esc(site.location)} · ${all.length} machines</div><div class="mgweb"><a href="${esc(websiteHref(site.website))}" target="_blank" rel="noopener">${esc(site.website)}</a></div><input id="fleetQ" aria-label="Find a machine" placeholder="Name, nickname, or ID" autocomplete="off" value="${esc(fleetQuery)}" oninput="onFleetQuery(this)"><div id="fleetList">${fleetListHtml(fleetQuery)}</div></div></article>`;
+}
+function loadFleet(){
+  fetch('machines.json').then(r=>{if(!r.ok)throw new Error(String(r.status));return r.json()}).then(data=>{
+    FLEET=data;
+    const h=location.hash||'';
+    let fromMachine='';
+    try{fromMachine=sessionStorage.getItem('ct_from_machine')||''}catch(e){}
+    if(/^#\/machine\//.test(h)||h==='#/machines'||fromMachine)render();
+  }).catch(()=>{
+    FLEET={error:true,machines:{}};
+    const h=location.hash||'';
+    if(/^#\/machine\//.test(h)||h==='#/machines')render();
+  });
+}
+function canonicalizeQuery(){
+  const params=new URLSearchParams(location.search);
+  const q=params.get('m');
+  if(!q||!q.trim())return;
+  params.delete('m');
+  const qs=params.toString();
+  history.replaceState(null,'',location.pathname+(qs?'?'+qs:'')+'#/machine/'+encodeURIComponent(q.trim()));
+}
+function applyHashToView(){
+  const m=(location.hash||'').match(/^#\/(today|week|cycle|hist|set)$/);
+  if(!m)return;
+  view=m[1];
+  if(view!=='today')override=null;
+}
+function render(){
+  canonicalizeMachineHash();
+  const mid=machineIdFromHash();
+  if(mid){
+    document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));
+    const m=findMachine(mid);
+    const label=m?((m.guide&&m.guide.aka)||m.nickname||m.equipment||m.id):'Machine guide';
+    document.getElementById('hdr').textContent=m?m.id+' · '+label:'Machine guide';
+    document.title=m?m.id+' · '+label+' — Created':'Created Training';
+    document.getElementById('app').innerHTML=machinePage(mid);
+    return;
+  }
+  document.title='Created Training';
+  if(location.hash==='#/machines'){
+    document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));
+    document.getElementById('hdr').textContent='Floor machines';
+    document.getElementById('app').innerHTML=fleetPage();
+    return;
+  }
+  const I=infoFor(new Date());
+  document.getElementById('hdr').textContent=`Week ${I.wk} of 8 · today: ${I.sess||'extras / recovery'}`;
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v==view));
+  document.getElementById('app').innerHTML={today,week,cycle,hist,set:settings}[view]();
+  save();
+}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  const next=b.dataset.v;
+  view=next;
+  if(next!=='today')override=null;
+  const target='#/'+next;
+  if(location.hash===target){render();scrollTo(0,0)}
+  else location.hash=target;
+});
+document.getElementById('app').addEventListener('click',ev=>{const btn=ev.target.closest('[data-log]');if(!btn)return;openLog(btn.getAttribute('data-log'))});
+if('serviceWorker'in navigator){navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});let _r=0;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!_r){_r=1;location.reload();}});}
+canonicalizeQuery();
+applyHashToView();
+window.addEventListener('hashchange',()=>{applyHashToView();render();scrollTo(0,0)});
+loadFleet();
+render();
 </script></body></html>
