@@ -4,16 +4,17 @@
   "location": "24/7 Strength · Ozark, MO",
   "qrUrl": "https://wmmcneely.github.io/created-training/#/machine/{id}",
   "importNotes": [
-    "Imported from the Created Training Center Equipment sheet. Only the Lower Extremity tab has an ID Number column.",
-    "Floor IDs on that sheet are L1, L2, and L3. Every other row is stored under a placeholder key UNASSIGNED-<section>-<row> with idMissing true. Placeholder keys are not for placards.",
-    "The L1 guide is the printed Machine Guide placard for the Nautilus 2ST Hip Extension (Super Glute Machine). Sheet columns stay on the record; placard sentences live under guide.",
+    "Imported from the Created Training Center Equipment sheet, then given a floor ID for every row.",
+    "IDs are a section letter plus a three-digit row number: L lower, U upper, T trunk, B total body, F free weight, C cardio, R restorative, Z business. L001 is Lower Extremity row 1.",
+    "The sheet IDs L1, L2, and L3 are legacy aliases of L001, L002, and L003. aliases maps the old code to the floor ID.",
+    "The L001 guide is the printed Machine Guide placard for the Nautilus 2ST Hip Extension (Super Glute Machine). Sheet columns stay on the record; placard sentences live under guide.",
     "Business Equipment type and method cells repeat the Restorative Equipment rows and look pasted into the wrong columns. The exported text is unchanged.",
     "Name-only rows, and the three identical Nautilus Dumbbell Rack lines, are kept as separate entries."
   ],
   "machines": {
-    "L1": {
-      "id": "L1",
-      "idMissing": false,
+    "L001": {
+      "id": "L001",
+      "legacyId": "L1",
       "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 1,
@@ -47,9 +48,9 @@
         "finishImage": ""
       }
     },
-    "L2": {
-      "id": "L2",
-      "idMissing": false,
+    "L002": {
+      "id": "L002",
+      "legacyId": "L2",
       "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 2,
@@ -72,9 +73,9 @@
       "video": "",
       "guide": null
     },
-    "L3": {
-      "id": "L3",
-      "idMissing": false,
+    "L003": {
+      "id": "L003",
+      "legacyId": "L3",
       "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 3,
@@ -97,12 +98,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-04": {
-      "id": "UNASSIGNED-LE-04",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L004": {
+      "id": "L004",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 4,
       "equipment": "Cybex VR2 Seated Back Extension",
@@ -124,12 +122,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-05": {
-      "id": "UNASSIGNED-LE-05",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L005": {
+      "id": "L005",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 5,
       "equipment": "Nautilus Nitro Seated Horizontal Leg Press",
@@ -151,12 +146,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-06": {
-      "id": "UNASSIGNED-LE-06",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L006": {
+      "id": "L006",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 6,
       "equipment": "Simba Seated 45° Leg Press",
@@ -178,11 +170,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-07": {
-      "id": "UNASSIGNED-LE-07",
-      "idMissing": true,
+    "L007": {
+      "id": "L007",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Lower Extremity",
@@ -206,12 +196,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-08": {
-      "id": "UNASSIGNED-LE-08",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L008": {
+      "id": "L008",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 8,
       "equipment": "Fitness Super Squat",
@@ -233,11 +220,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-09": {
-      "id": "UNASSIGNED-LE-09",
-      "idMissing": true,
+    "L009": {
+      "id": "L009",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Lower Extremity",
@@ -261,12 +246,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-10": {
-      "id": "UNASSIGNED-LE-10",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L010": {
+      "id": "L010",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 10,
       "equipment": "Body Masters Standing Multi-Hip",
@@ -288,12 +270,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-11": {
-      "id": "UNASSIGNED-LE-11",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L011": {
+      "id": "L011",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 11,
       "equipment": "Nautilus One Seated Hip Abduction/Adduction",
@@ -315,11 +294,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-12": {
-      "id": "UNASSIGNED-LE-12",
-      "idMissing": true,
+    "L012": {
+      "id": "L012",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Lower Extremity",
@@ -343,12 +320,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-13": {
-      "id": "UNASSIGNED-LE-13",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L013": {
+      "id": "L013",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 13,
       "equipment": "Fettle Fitness Combo GHD/ Reverse Hyper",
@@ -370,11 +344,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-14": {
-      "id": "UNASSIGNED-LE-14",
-      "idMissing": true,
+    "L014": {
+      "id": "L014",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Lower Extremity",
@@ -398,11 +370,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-15": {
-      "id": "UNASSIGNED-LE-15",
-      "idMissing": true,
+    "L015": {
+      "id": "L015",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Lower Extremity",
@@ -426,12 +396,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-16": {
-      "id": "UNASSIGNED-LE-16",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L016": {
+      "id": "L016",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 16,
       "equipment": "Cybex Seated Leg Extension",
@@ -453,12 +420,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-17": {
-      "id": "UNASSIGNED-LE-17",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L017": {
+      "id": "L017",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 17,
       "equipment": "Cybex Seated Leg Curl",
@@ -480,12 +444,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-18": {
-      "id": "UNASSIGNED-LE-18",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L018": {
+      "id": "L018",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 18,
       "equipment": "Cybex Prone Leg Curl",
@@ -507,12 +468,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-19": {
-      "id": "UNASSIGNED-LE-19",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L019": {
+      "id": "L019",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 19,
       "equipment": "Cybex Standing Calve Raise",
@@ -534,12 +492,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-20": {
-      "id": "UNASSIGNED-LE-20",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L020": {
+      "id": "L020",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 20,
       "equipment": "Nautilus Seated Calve Raise",
@@ -561,12 +516,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-21": {
-      "id": "UNASSIGNED-LE-21",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L021": {
+      "id": "L021",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 21,
       "equipment": "Titan Tibialis Raise",
@@ -588,12 +540,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-22": {
-      "id": "UNASSIGNED-LE-22",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L022": {
+      "id": "L022",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 22,
       "equipment": "Aaron Mattes Foot-Ankle Exerciser",
@@ -615,12 +564,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-23": {
-      "id": "UNASSIGNED-LE-23",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L023": {
+      "id": "L023",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 23,
       "equipment": "Simba Pendulum Squat",
@@ -642,12 +588,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-24": {
-      "id": "UNASSIGNED-LE-24",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L024": {
+      "id": "L024",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 24,
       "equipment": "Simba Seated Calve PressDown",
@@ -669,12 +612,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-25": {
-      "id": "UNASSIGNED-LE-25",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L025": {
+      "id": "L025",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 25,
       "equipment": "Free Motion Seated Calve Press",
@@ -696,12 +636,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-LE-26": {
-      "id": "UNASSIGNED-LE-26",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "L026": {
+      "id": "L026",
+      "flags": [],
       "section": "Lower Extremity",
       "sheetRow": 26,
       "equipment": "Sorinex Belt Squat",
@@ -723,12 +660,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-01": {
-      "id": "UNASSIGNED-UE-01",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "U001": {
+      "id": "U001",
+      "flags": [],
       "section": "Upper Extremity",
       "sheetRow": 1,
       "equipment": "Nautilus Nitro Seated Pec Dec/Rear Delt Fly",
@@ -750,11 +684,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-02": {
-      "id": "UNASSIGNED-UE-02",
-      "idMissing": true,
+    "U002": {
+      "id": "U002",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Upper Extremity",
@@ -778,12 +710,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-03": {
-      "id": "UNASSIGNED-UE-03",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "U003": {
+      "id": "U003",
+      "flags": [],
       "section": "Upper Extremity",
       "sheetRow": 3,
       "equipment": "Nautilus Nitro Gravitron PullUp/Dip Station",
@@ -805,12 +734,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-04": {
-      "id": "UNASSIGNED-UE-04",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "U004": {
+      "id": "U004",
+      "flags": [],
       "section": "Upper Extremity",
       "sheetRow": 4,
       "equipment": "Nautilus Nitro Seated Vertical Chest Press",
@@ -832,12 +758,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-05": {
-      "id": "UNASSIGNED-UE-05",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "U005": {
+      "id": "U005",
+      "flags": [],
       "section": "Upper Extremity",
       "sheetRow": 5,
       "equipment": "Nautilus Nitro Seated Vertical Shoulder Press",
@@ -859,12 +782,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-06": {
-      "id": "UNASSIGNED-UE-06",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "U006": {
+      "id": "U006",
+      "flags": [],
       "section": "Upper Extremity",
       "sheetRow": 6,
       "equipment": "Nautilus Nitro Seated 35° Incline Chest Press",
@@ -886,12 +806,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-07": {
-      "id": "UNASSIGNED-UE-07",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "U007": {
+      "id": "U007",
+      "flags": [],
       "section": "Upper Extremity",
       "sheetRow": 7,
       "equipment": "Cybex Seated Chest Supported Row",
@@ -913,11 +830,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-08": {
-      "id": "UNASSIGNED-UE-08",
-      "idMissing": true,
+    "U008": {
+      "id": "U008",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Upper Extremity",
@@ -941,12 +856,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-09": {
-      "id": "UNASSIGNED-UE-09",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "U009": {
+      "id": "U009",
+      "flags": [],
       "section": "Upper Extremity",
       "sheetRow": 9,
       "equipment": "Nautilus One Seated Chest Supported MidBack Row",
@@ -968,11 +880,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-10": {
-      "id": "UNASSIGNED-UE-10",
-      "idMissing": true,
+    "U010": {
+      "id": "U010",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Upper Extremity",
@@ -996,12 +906,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-11": {
-      "id": "UNASSIGNED-UE-11",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "U011": {
+      "id": "U011",
+      "flags": [],
       "section": "Upper Extremity",
       "sheetRow": 11,
       "equipment": "Nautilus Nitro Seated Super Pullover",
@@ -1023,11 +930,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-12": {
-      "id": "UNASSIGNED-UE-12",
-      "idMissing": true,
+    "U012": {
+      "id": "U012",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Upper Extremity",
@@ -1051,12 +956,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-13": {
-      "id": "UNASSIGNED-UE-13",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "U013": {
+      "id": "U013",
+      "flags": [],
       "section": "Upper Extremity",
       "sheetRow": 13,
       "equipment": "Nautilus Nitro Seated Pulldown",
@@ -1078,12 +980,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-14": {
-      "id": "UNASSIGNED-UE-14",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "U014": {
+      "id": "U014",
+      "flags": [],
       "section": "Upper Extremity",
       "sheetRow": 14,
       "equipment": "Cybex Seated Lateral Raise",
@@ -1105,12 +1004,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-15": {
-      "id": "UNASSIGNED-UE-15",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "U015": {
+      "id": "U015",
+      "flags": [],
       "section": "Upper Extremity",
       "sheetRow": 15,
       "equipment": "Nautilus Nitro Seated Overhead Biceps Curl",
@@ -1132,11 +1028,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-16": {
-      "id": "UNASSIGNED-UE-16",
-      "idMissing": true,
+    "U016": {
+      "id": "U016",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Upper Extremity",
@@ -1160,12 +1054,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-17": {
-      "id": "UNASSIGNED-UE-17",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "U017": {
+      "id": "U017",
+      "flags": [],
       "section": "Upper Extremity",
       "sheetRow": 17,
       "equipment": "Nautilus Nitro Seated Triceps Extension",
@@ -1187,11 +1078,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-18": {
-      "id": "UNASSIGNED-UE-18",
-      "idMissing": true,
+    "U018": {
+      "id": "U018",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Upper Extremity",
@@ -1215,12 +1104,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-19": {
-      "id": "UNASSIGNED-UE-19",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "U019": {
+      "id": "U019",
+      "flags": [],
       "section": "Upper Extremity",
       "sheetRow": 19,
       "equipment": "Seated Nautilus Preacher Curl Bench",
@@ -1242,12 +1128,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-20": {
-      "id": "UNASSIGNED-UE-20",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "U020": {
+      "id": "U020",
+      "flags": [],
       "section": "Upper Extremity",
       "sheetRow": 20,
       "equipment": "Seated Cybex Preacher Curl Bench",
@@ -1269,12 +1152,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-UE-21": {
-      "id": "UNASSIGNED-UE-21",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "U021": {
+      "id": "U021",
+      "flags": [],
       "section": "Upper Extremity",
       "sheetRow": 21,
       "equipment": "Seated Nautilus 4-Way Neck",
@@ -1296,12 +1176,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TR-01": {
-      "id": "UNASSIGNED-TR-01",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "T001": {
+      "id": "T001",
+      "flags": [],
       "section": "Trunk Equipment",
       "sheetRow": 1,
       "equipment": "Cybex Seated Lower Rotation",
@@ -1323,12 +1200,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TR-02": {
-      "id": "UNASSIGNED-TR-02",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "T002": {
+      "id": "T002",
+      "flags": [],
       "section": "Trunk Equipment",
       "sheetRow": 2,
       "equipment": "Cyberx Seated Upper Rotation",
@@ -1350,12 +1224,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TR-03": {
-      "id": "UNASSIGNED-TR-03",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "T003": {
+      "id": "T003",
+      "flags": [],
       "section": "Trunk Equipment",
       "sheetRow": 3,
       "equipment": "Nautilus Seated Upper Arm Rotation",
@@ -1377,12 +1248,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TR-04": {
-      "id": "UNASSIGNED-TR-04",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "T004": {
+      "id": "T004",
+      "flags": [],
       "section": "Trunk Equipment",
       "sheetRow": 4,
       "equipment": "Nautilus One Seated Abdominal Crunch",
@@ -1404,12 +1272,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TR-05": {
-      "id": "UNASSIGNED-TR-05",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "T005": {
+      "id": "T005",
+      "flags": [],
       "section": "Trunk Equipment",
       "sheetRow": 5,
       "equipment": "Nautilus One Seated Low Back",
@@ -1431,11 +1296,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TR-06": {
-      "id": "UNASSIGNED-TR-06",
-      "idMissing": true,
+    "T006": {
+      "id": "T006",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Trunk Equipment",
@@ -1459,12 +1322,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TR-07": {
-      "id": "UNASSIGNED-TR-07",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "T007": {
+      "id": "T007",
+      "flags": [],
       "section": "Trunk Equipment",
       "sheetRow": 7,
       "equipment": "CorePAD",
@@ -1486,12 +1346,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TR-08": {
-      "id": "UNASSIGNED-TR-08",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "T008": {
+      "id": "T008",
+      "flags": [],
       "section": "Trunk Equipment",
       "sheetRow": 8,
       "equipment": "Reverse CorePad",
@@ -1513,12 +1370,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TR-09": {
-      "id": "UNASSIGNED-TR-09",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "T009": {
+      "id": "T009",
+      "flags": [],
       "section": "Trunk Equipment",
       "sheetRow": 9,
       "equipment": "PureTorque",
@@ -1540,12 +1394,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-01": {
-      "id": "UNASSIGNED-TB-01",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "B001": {
+      "id": "B001",
+      "flags": [],
       "section": "Total Body Equipment",
       "sheetRow": 1,
       "equipment": "Training Table",
@@ -1567,12 +1418,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-02": {
-      "id": "UNASSIGNED-TB-02",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "B002": {
+      "id": "B002",
+      "flags": [],
       "section": "Total Body Equipment",
       "sheetRow": 2,
       "equipment": "Cybex Bravo Pro Cable System",
@@ -1594,11 +1442,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-03": {
-      "id": "UNASSIGNED-TB-03",
-      "idMissing": true,
+    "B003": {
+      "id": "B003",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Total Body Equipment",
@@ -1622,12 +1468,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-04": {
-      "id": "UNASSIGNED-TB-04",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "B004": {
+      "id": "B004",
+      "flags": [],
       "section": "Total Body Equipment",
       "sheetRow": 4,
       "equipment": "Nautilus F2 5 Stack",
@@ -1649,12 +1492,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-05": {
-      "id": "UNASSIGNED-TB-05",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "B005": {
+      "id": "B005",
+      "flags": [],
       "section": "Total Body Equipment",
       "sheetRow": 5,
       "equipment": "Body Masters 5 Stack",
@@ -1676,11 +1516,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-06": {
-      "id": "UNASSIGNED-TB-06",
-      "idMissing": true,
+    "B006": {
+      "id": "B006",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Total Body Equipment",
@@ -1704,12 +1542,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-07": {
-      "id": "UNASSIGNED-TB-07",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "B007": {
+      "id": "B007",
+      "flags": [],
       "section": "Total Body Equipment",
       "sheetRow": 7,
       "equipment": "Dumbbell Pairs 1 -- 22.5#",
@@ -1731,12 +1566,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-08": {
-      "id": "UNASSIGNED-TB-08",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "B008": {
+      "id": "B008",
+      "flags": [],
       "section": "Total Body Equipment",
       "sheetRow": 8,
       "equipment": "Dumbbell Pairs 5 -- 115#",
@@ -1758,11 +1590,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-09": {
-      "id": "UNASSIGNED-TB-09",
-      "idMissing": true,
+    "B009": {
+      "id": "B009",
       "flags": [
-        "missing-id",
         "name-only",
         "duplicate-name"
       ],
@@ -1787,11 +1617,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-10": {
-      "id": "UNASSIGNED-TB-10",
-      "idMissing": true,
+    "B010": {
+      "id": "B010",
       "flags": [
-        "missing-id",
         "name-only",
         "duplicate-name"
       ],
@@ -1816,11 +1644,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-11": {
-      "id": "UNASSIGNED-TB-11",
-      "idMissing": true,
+    "B011": {
+      "id": "B011",
       "flags": [
-        "missing-id",
         "name-only",
         "duplicate-name"
       ],
@@ -1845,12 +1671,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-12": {
-      "id": "UNASSIGNED-TB-12",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "B012": {
+      "id": "B012",
+      "flags": [],
       "section": "Total Body Equipment",
       "sheetRow": 12,
       "equipment": "Red Rep Squat Rack",
@@ -1872,12 +1695,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-13": {
-      "id": "UNASSIGNED-TB-13",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "B013": {
+      "id": "B013",
+      "flags": [],
       "section": "Total Body Equipment",
       "sheetRow": 13,
       "equipment": "Blue EliteFTS Squat Rack",
@@ -1899,11 +1719,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-14": {
-      "id": "UNASSIGNED-TB-14",
-      "idMissing": true,
+    "B014": {
+      "id": "B014",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Total Body Equipment",
@@ -1927,12 +1745,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-15": {
-      "id": "UNASSIGNED-TB-15",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "B015": {
+      "id": "B015",
+      "flags": [],
       "section": "Total Body Equipment",
       "sheetRow": 15,
       "equipment": "Nautilus Angled Smith Machine",
@@ -1954,12 +1769,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-16": {
-      "id": "UNASSIGNED-TB-16",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "B016": {
+      "id": "B016",
+      "flags": [],
       "section": "Total Body Equipment",
       "sheetRow": 16,
       "equipment": "Nautilus Smith Machine",
@@ -1981,12 +1793,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-17": {
-      "id": "UNASSIGNED-TB-17",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "B017": {
+      "id": "B017",
+      "flags": [],
       "section": "Total Body Equipment",
       "sheetRow": 17,
       "equipment": "0-90° Adjustable Bench (F30-90)",
@@ -2008,12 +1817,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-18": {
-      "id": "UNASSIGNED-TB-18",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "B018": {
+      "id": "B018",
+      "flags": [],
       "section": "Total Body Equipment",
       "sheetRow": 18,
       "equipment": "Adjustable Abdominal Bench (F3AAB - China)",
@@ -2035,12 +1841,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-19": {
-      "id": "UNASSIGNED-TB-19",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "B019": {
+      "id": "B019",
+      "flags": [],
       "section": "Total Body Equipment",
       "sheetRow": 19,
       "equipment": "Heavy Duty Adjustable Incline Spotter Bench",
@@ -2062,12 +1865,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-20": {
-      "id": "UNASSIGNED-TB-20",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "B020": {
+      "id": "B020",
+      "flags": [],
       "section": "Total Body Equipment",
       "sheetRow": 20,
       "equipment": "Flat Utility Bench (2)",
@@ -2089,12 +1889,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-TB-21": {
-      "id": "UNASSIGNED-TB-21",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "B021": {
+      "id": "B021",
+      "flags": [],
       "section": "Total Body Equipment",
       "sheetRow": 21,
       "equipment": "0-90° Incline Bench FW090",
@@ -2116,12 +1913,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-FW-01": {
-      "id": "UNASSIGNED-FW-01",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "F001": {
+      "id": "F001",
+      "flags": [],
       "section": "Free Weight Equipment",
       "sheetRow": 1,
       "equipment": "45# Steel 5 Hole Plates",
@@ -2143,11 +1937,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-FW-02": {
-      "id": "UNASSIGNED-FW-02",
-      "idMissing": true,
+    "F002": {
+      "id": "F002",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Free Weight Equipment",
@@ -2171,11 +1963,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-FW-03": {
-      "id": "UNASSIGNED-FW-03",
-      "idMissing": true,
+    "F003": {
+      "id": "F003",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Free Weight Equipment",
@@ -2199,11 +1989,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-FW-04": {
-      "id": "UNASSIGNED-FW-04",
-      "idMissing": true,
+    "F004": {
+      "id": "F004",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Free Weight Equipment",
@@ -2227,11 +2015,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-FW-05": {
-      "id": "UNASSIGNED-FW-05",
-      "idMissing": true,
+    "F005": {
+      "id": "F005",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Free Weight Equipment",
@@ -2255,11 +2041,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-FW-06": {
-      "id": "UNASSIGNED-FW-06",
-      "idMissing": true,
+    "F006": {
+      "id": "F006",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Free Weight Equipment",
@@ -2283,12 +2067,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-CA-01": {
-      "id": "UNASSIGNED-CA-01",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "C001": {
+      "id": "C001",
+      "flags": [],
       "section": "Cardio Equipment",
       "sheetRow": 1,
       "equipment": "Treadmill (Commercial T914)",
@@ -2310,12 +2091,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-CA-02": {
-      "id": "UNASSIGNED-CA-02",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "C002": {
+      "id": "C002",
+      "flags": [],
       "section": "Cardio Equipment",
       "sheetRow": 2,
       "equipment": "HITT Mill",
@@ -2337,12 +2115,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-CA-03": {
-      "id": "UNASSIGNED-CA-03",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "C003": {
+      "id": "C003",
+      "flags": [],
       "section": "Cardio Equipment",
       "sheetRow": 3,
       "equipment": "Arc Trainer",
@@ -2364,12 +2139,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-CA-04": {
-      "id": "UNASSIGNED-CA-04",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "C004": {
+      "id": "C004",
+      "flags": [],
       "section": "Cardio Equipment",
       "sheetRow": 4,
       "equipment": "StepMill",
@@ -2391,12 +2163,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-CA-05": {
-      "id": "UNASSIGNED-CA-05",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "C005": {
+      "id": "C005",
+      "flags": [],
       "section": "Cardio Equipment",
       "sheetRow": 5,
       "equipment": "StairMaster",
@@ -2418,12 +2187,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-CA-06": {
-      "id": "UNASSIGNED-CA-06",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "C006": {
+      "id": "C006",
+      "flags": [],
       "section": "Cardio Equipment",
       "sheetRow": 6,
       "equipment": "Upright Bike",
@@ -2445,12 +2211,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-CA-07": {
-      "id": "UNASSIGNED-CA-07",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "C007": {
+      "id": "C007",
+      "flags": [],
       "section": "Cardio Equipment",
       "sheetRow": 7,
       "equipment": "Rower",
@@ -2472,12 +2235,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-CA-08": {
-      "id": "UNASSIGNED-CA-08",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "C008": {
+      "id": "C008",
+      "flags": [],
       "section": "Cardio Equipment",
       "sheetRow": 8,
       "equipment": "SkiErg",
@@ -2499,12 +2259,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-CA-09": {
-      "id": "UNASSIGNED-CA-09",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "C009": {
+      "id": "C009",
+      "flags": [],
       "section": "Cardio Equipment",
       "sheetRow": 9,
       "equipment": "Power Runner",
@@ -2526,12 +2283,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-RS-01": {
-      "id": "UNASSIGNED-RS-01",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "R001": {
+      "id": "R001",
+      "flags": [],
       "section": "Restorative Equipment",
       "sheetRow": 1,
       "equipment": "Cold Plunge",
@@ -2553,12 +2307,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-RS-02": {
-      "id": "UNASSIGNED-RS-02",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "R002": {
+      "id": "R002",
+      "flags": [],
       "section": "Restorative Equipment",
       "sheetRow": 2,
       "equipment": "Hot Tub",
@@ -2580,12 +2331,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-RS-03": {
-      "id": "UNASSIGNED-RS-03",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "R003": {
+      "id": "R003",
+      "flags": [],
       "section": "Restorative Equipment",
       "sheetRow": 3,
       "equipment": "Infrared Sauna",
@@ -2607,12 +2355,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-RS-04": {
-      "id": "UNASSIGNED-RS-04",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "R004": {
+      "id": "R004",
+      "flags": [],
       "section": "Restorative Equipment",
       "sheetRow": 4,
       "equipment": "Sunvision Elite 32 3F Wolff System Tanning Bed",
@@ -2634,12 +2379,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-BZ-01": {
-      "id": "UNASSIGNED-BZ-01",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "Z001": {
+      "id": "Z001",
+      "flags": [],
       "section": "Business Equipment",
       "sheetRow": 1,
       "equipment": "Televisions",
@@ -2661,12 +2403,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-BZ-02": {
-      "id": "UNASSIGNED-BZ-02",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "Z002": {
+      "id": "Z002",
+      "flags": [],
       "section": "Business Equipment",
       "sheetRow": 2,
       "equipment": "Reviver AED",
@@ -2688,12 +2427,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-BZ-03": {
-      "id": "UNASSIGNED-BZ-03",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "Z003": {
+      "id": "Z003",
+      "flags": [],
       "section": "Business Equipment",
       "sheetRow": 3,
       "equipment": "HP Computer",
@@ -2715,12 +2451,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-BZ-04": {
-      "id": "UNASSIGNED-BZ-04",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "Z004": {
+      "id": "Z004",
+      "flags": [],
       "section": "Business Equipment",
       "sheetRow": 4,
       "equipment": "Computer",
@@ -2742,12 +2475,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-BZ-05": {
-      "id": "UNASSIGNED-BZ-05",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "Z005": {
+      "id": "Z005",
+      "flags": [],
       "section": "Business Equipment",
       "sheetRow": 5,
       "equipment": "Sony Reciever",
@@ -2769,12 +2499,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-BZ-06": {
-      "id": "UNASSIGNED-BZ-06",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "Z006": {
+      "id": "Z006",
+      "flags": [],
       "section": "Business Equipment",
       "sheetRow": 6,
       "equipment": "Pallet Jack",
@@ -2796,12 +2523,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-BZ-07": {
-      "id": "UNASSIGNED-BZ-07",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "Z007": {
+      "id": "Z007",
+      "flags": [],
       "section": "Business Equipment",
       "sheetRow": 7,
       "equipment": "Dolly",
@@ -2823,12 +2547,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-BZ-08": {
-      "id": "UNASSIGNED-BZ-08",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "Z008": {
+      "id": "Z008",
+      "flags": [],
       "section": "Business Equipment",
       "sheetRow": 8,
       "equipment": "Mini Fridge (Newair)",
@@ -2850,12 +2571,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-BZ-09": {
-      "id": "UNASSIGNED-BZ-09",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "Z009": {
+      "id": "Z009",
+      "flags": [],
       "section": "Business Equipment",
       "sheetRow": 9,
       "equipment": "Seca Weight Scale",
@@ -2877,12 +2595,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-BZ-10": {
-      "id": "UNASSIGNED-BZ-10",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "Z010": {
+      "id": "Z010",
+      "flags": [],
       "section": "Business Equipment",
       "sheetRow": 10,
       "equipment": "Anatomical Skeleton",
@@ -2904,12 +2619,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-BZ-11": {
-      "id": "UNASSIGNED-BZ-11",
-      "idMissing": true,
-      "flags": [
-        "missing-id"
-      ],
+    "Z011": {
+      "id": "Z011",
+      "flags": [],
       "section": "Business Equipment",
       "sheetRow": 11,
       "equipment": "Defender Cameras",
@@ -2931,11 +2643,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-BZ-12": {
-      "id": "UNASSIGNED-BZ-12",
-      "idMissing": true,
+    "Z012": {
+      "id": "Z012",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Business Equipment",
@@ -2959,11 +2669,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-BZ-13": {
-      "id": "UNASSIGNED-BZ-13",
-      "idMissing": true,
+    "Z013": {
+      "id": "Z013",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Business Equipment",
@@ -2987,11 +2695,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-BZ-14": {
-      "id": "UNASSIGNED-BZ-14",
-      "idMissing": true,
+    "Z014": {
+      "id": "Z014",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Business Equipment",
@@ -3015,11 +2721,9 @@
       "video": "",
       "guide": null
     },
-    "UNASSIGNED-BZ-15": {
-      "id": "UNASSIGNED-BZ-15",
-      "idMissing": true,
+    "Z015": {
+      "id": "Z015",
       "flags": [
-        "missing-id",
         "name-only"
       ],
       "section": "Business Equipment",
@@ -3043,5 +2747,10 @@
       "video": "",
       "guide": null
     }
+  },
+  "aliases": {
+    "L1": "L001",
+    "L2": "L002",
+    "L3": "L003"
   }
 }

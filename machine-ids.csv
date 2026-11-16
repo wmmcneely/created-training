@@ -1,0 +1,112 @@
+id,section,equipment
+L001,Lower Extremity,Nautilus 2ST Hip Extension
+L002,Lower Extremity,Nautilus Glute Drive
+L003,Lower Extremity,Atlantis 30 to 60° Adjustable Hip Extension
+L004,Lower Extremity,Cybex VR2 Seated Back Extension
+L005,Lower Extremity,Nautilus Nitro Seated Horizontal Leg Press
+L006,Lower Extremity,Simba Seated 45° Leg Press
+L007,Lower Extremity,Hammer Strength H Squat
+L008,Lower Extremity,Fitness Super Squat
+L009,Lower Extremity,Simba Hack Squat
+L010,Lower Extremity,Body Masters Standing Multi-Hip
+L011,Lower Extremity,Nautilus One Seated Hip Abduction/Adduction
+L012,Lower Extremity,Nautilus Evo Seated Hip Abduction/Adduction
+L013,Lower Extremity,Fettle Fitness Combo GHD/ Reverse Hyper
+L014,Lower Extremity,Simba Kneeling Hip Extension
+L015,Lower Extremity,Kneeling Glute Kickback Machine
+L016,Lower Extremity,Cybex Seated Leg Extension
+L017,Lower Extremity,Cybex Seated Leg Curl
+L018,Lower Extremity,Cybex Prone Leg Curl
+L019,Lower Extremity,Cybex Standing Calve Raise
+L020,Lower Extremity,Nautilus Seated Calve Raise
+L021,Lower Extremity,Titan Tibialis Raise
+L022,Lower Extremity,Aaron Mattes Foot-Ankle Exerciser
+L023,Lower Extremity,Simba Pendulum Squat
+L024,Lower Extremity,Simba Seated Calve PressDown
+L025,Lower Extremity,Free Motion Seated Calve Press
+L026,Lower Extremity,Sorinex Belt Squat
+U001,Upper Extremity,Nautilus Nitro Seated Pec Dec/Rear Delt Fly
+U002,Upper Extremity,Simba Pec/Rear Delt Handle Fly
+U003,Upper Extremity,Nautilus Nitro Gravitron PullUp/Dip Station
+U004,Upper Extremity,Nautilus Nitro Seated Vertical Chest Press
+U005,Upper Extremity,Nautilus Nitro Seated Vertical Shoulder Press
+U006,Upper Extremity,Nautilus Nitro Seated 35° Incline Chest Press
+U007,Upper Extremity,Cybex Seated Chest Supported Row
+U008,Upper Extremity,Nautilus Nitro Compound Row
+U009,Upper Extremity,Nautilus One Seated Chest Supported MidBack Row
+U010,Upper Extremity,Nautilus Nitro T-Bar Plate Loaded Row
+U011,Upper Extremity,Nautilus Nitro Seated Super Pullover
+U012,Upper Extremity,Nautilus 2ST Upperback Row
+U013,Upper Extremity,Nautilus Nitro Seated Pulldown
+U014,Upper Extremity,Cybex Seated Lateral Raise
+U015,Upper Extremity,Nautilus Nitro Seated Overhead Biceps Curl
+U016,Upper Extremity,Cybex Seated Preacher Curl
+U017,Upper Extremity,Nautilus Nitro Seated Triceps Extension
+U018,Upper Extremity,Nautilus Nitro Seated Overhead Triceds Extension
+U019,Upper Extremity,Seated Nautilus Preacher Curl Bench
+U020,Upper Extremity,Seated Cybex Preacher Curl Bench
+U021,Upper Extremity,Seated Nautilus 4-Way Neck
+T001,Trunk Equipment,Cybex Seated Lower Rotation
+T002,Trunk Equipment,Cyberx Seated Upper Rotation
+T003,Trunk Equipment,Nautilus Seated Upper Arm Rotation
+T004,Trunk Equipment,Nautilus One Seated Abdominal Crunch
+T005,Trunk Equipment,Nautilus One Seated Low Back
+T006,Trunk Equipment,Atlantis Ab Crunch Chair
+T007,Trunk Equipment,CorePAD
+T008,Trunk Equipment,Reverse CorePad
+T009,Trunk Equipment,PureTorque
+B001,Total Body Equipment,Training Table
+B002,Total Body Equipment,Cybex Bravo Pro Cable System
+B003,Total Body Equipment,Nautilus Freedom Trainer
+B004,Total Body Equipment,Nautilus F2 5 Stack
+B005,Total Body Equipment,Body Masters 5 Stack
+B006,Total Body Equipment,PowerLift Deadlift Machine
+B007,Total Body Equipment,Dumbbell Pairs 1 -- 22.5#
+B008,Total Body Equipment,Dumbbell Pairs 5 -- 115#
+B009,Total Body Equipment,Nautilus Dumbbell Rack
+B010,Total Body Equipment,Nautilus Dumbbell Rack
+B011,Total Body Equipment,Nautilus Dumbbell Rack
+B012,Total Body Equipment,Red Rep Squat Rack
+B013,Total Body Equipment,Blue EliteFTS Squat Rack
+B014,Total Body Equipment,Black Crepinsek Squat MonoRack
+B015,Total Body Equipment,Nautilus Angled Smith Machine
+B016,Total Body Equipment,Nautilus Smith Machine
+B017,Total Body Equipment,0-90° Adjustable Bench (F30-90)
+B018,Total Body Equipment,Adjustable Abdominal Bench (F3AAB - China)
+B019,Total Body Equipment,Heavy Duty Adjustable Incline Spotter Bench
+B020,Total Body Equipment,Flat Utility Bench (2)
+B021,Total Body Equipment,0-90° Incline Bench FW090
+F001,Free Weight Equipment,45# Steel 5 Hole Plates
+F002,Free Weight Equipment,45# Rubberized Steel 5 Hole Plates
+F003,Free Weight Equipment,45# Bumber Plates
+F004,Free Weight Equipment,Barbells
+F005,Free Weight Equipment,Super Squat Bar
+F006,Free Weight Equipment,Safety Squat Bar
+C001,Cardio Equipment,Treadmill (Commercial T914)
+C002,Cardio Equipment,HITT Mill
+C003,Cardio Equipment,Arc Trainer
+C004,Cardio Equipment,StepMill
+C005,Cardio Equipment,StairMaster
+C006,Cardio Equipment,Upright Bike
+C007,Cardio Equipment,Rower
+C008,Cardio Equipment,SkiErg
+C009,Cardio Equipment,Power Runner
+R001,Restorative Equipment,Cold Plunge
+R002,Restorative Equipment,Hot Tub
+R003,Restorative Equipment,Infrared Sauna
+R004,Restorative Equipment,Sunvision Elite 32 3F Wolff System Tanning Bed
+Z001,Business Equipment,Televisions
+Z002,Business Equipment,Reviver AED
+Z003,Business Equipment,HP Computer
+Z004,Business Equipment,Computer
+Z005,Business Equipment,Sony Reciever
+Z006,Business Equipment,Pallet Jack
+Z007,Business Equipment,Dolly
+Z008,Business Equipment,Mini Fridge (Newair)
+Z009,Business Equipment,Seca Weight Scale
+Z010,Business Equipment,Anatomical Skeleton
+Z011,Business Equipment,Defender Cameras
+Z012,Business Equipment,Posters
+Z013,Business Equipment,Trashcans
+Z014,Business Equipment,Furniture
+Z015,Business Equipment,Storage Rack

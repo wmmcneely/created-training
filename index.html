@@ -151,7 +151,8 @@ function gymInfo(){return{name:(FLEET&&FLEET.name)||'Created',website:(FLEET&&FL
 function websiteHref(site){const w=site||'www.created.center';if(/^https?:\/\//i.test(w))return w;return 'https://'+w.replace(/^\/\//,'')}
 function safeHttp(url){try{const u=new URL(url);if(u.protocol==='https:'||u.protocol==='http:')return u.href}catch(e){}return ''}
 function safeImg(path){if(!path)return '';if(/^[A-Za-z0-9_./-]+$/.test(path)&&path.indexOf('..')===-1&&path.charAt(0)!=='/')return path;return safeHttp(path)}
-function findMachine(id){if(!FLEET||!FLEET.machines||!id)return null;if(FLEET.machines[id])return FLEET.machines[id];const want=String(id).toUpperCase();for(const key of Object.keys(FLEET.machines)){if(key.toUpperCase()===want)return FLEET.machines[key]}return null}
+function findMachine(id){if(!FLEET||!FLEET.machines||!id)return null;const machines=FLEET.machines;if(machines[id])return machines[id];const want=String(id).trim().toUpperCase();const aliases=FLEET.aliases||{};let target=aliases[want];if(!target){for(const key of Object.keys(aliases)){if(key.toUpperCase()===want){target=aliases[key];break}}}if(target&&machines[target])return machines[target];if(machines[want])return machines[want];for(const key of Object.keys(machines)){if(key.toUpperCase()===want)return machines[key]}return null}
+function canonicalizeMachineHash(){if(!FLEET||!FLEET.machines)return;const raw=machineIdFromHash();if(!raw)return;const m=findMachine(raw);if(!m||raw===m.id)return;const params=new URLSearchParams(location.search);params.delete('m');const qs=params.toString();history.replaceState(null,'',location.pathname+(qs?'?'+qs:'')+'#/machine/'+encodeURIComponent(m.id))}
 function machineIdFromHash(){const m=(location.hash||'').match(/^#\/machine\/([^/?#]+)$/);return m?decodeURIComponent(m[1]):null}
 function akaLine(aka){if(!aka)return '';return aka.indexOf('"')===-1?'aka "'+esc(aka)+'"':'aka '+esc(aka)}
 function fromMachineBanner(){let id='';try{id=sessionStorage.getItem('ct_from_machine')||''}catch(e){}if(!id)return '';const m=findMachine(id);const label=m?((m.guide&&m.guide.aka)||m.nickname||m.equipment||m.id):id;const mid=m?m.id:id;return `<div class="note">From ${esc(mid)} · ${esc(label)}. <a href="#/machine/${encodeURIComponent(mid)}">Guide</a> <button class="b" type="button" onclick="clearFromMachine()">Dismiss</button></div>`}
@@ -176,11 +177,10 @@ function machinePage(rawId){
   const video=safeHttp(m.video);
   const hasGuide=!!(g.title||g.primary||g.setup||g.movement||g.caution);
   const parts=['<article class="mg"><div class="brandbar"><span class="g"></span><span class="r"></span></div><div class="mgbody">'];
-  parts.push(`<div class="mgtopline"><span class="mgword">CREATED</span><span class="mgid${m.idMissing?' ph':''}">${esc(m.id)}</span></div>`);
+  parts.push(`<div class="mgtopline"><span class="mgword">CREATED</span><span class="mgid">${esc(m.id)}</span></div>`);
   parts.push(`<div class="mgmeta">${esc(site.location)}</div>`);
   parts.push(`<div class="mgweb"><a href="${esc(websiteHref(site.website))}" target="_blank" rel="noopener">${esc(site.website)}</a></div>`);
   if(m.paused)parts.push('<div class="paused">Paused</div>');
-  if(m.idMissing)parts.push('<p class="noid">No floor ID yet.</p>');
   if(brandLine)parts.push(`<div class="mgbrandline">${esc(brandLine)}</div>`);
   parts.push(`<h2>${esc(title)}</h2>`);
   if(showAka)parts.push(`<p class="aka">${akaLine(aka)}</p>`);
@@ -213,7 +213,7 @@ function fleetListHtml(q){
   for(const m of machines){
     if(query){
       const g=m.guide||{};
-      const hay=[m.id,m.equipment,m.createdName,m.nickname,m.brand,m.muscle,m.movement,m.simplyPut,m.section,g.title,g.aka,g.primary,g.secondary].join('\n').toLowerCase();
+      const hay=[m.id,m.legacyId,m.equipment,m.createdName,m.nickname,m.brand,m.muscle,m.movement,m.simplyPut,m.section,g.title,g.aka,g.primary,g.secondary].join('\n').toLowerCase();
       if(hay.indexOf(query)===-1)continue;
     }
     n++;
@@ -230,8 +230,7 @@ function fleetPage(){
   if(FLEET.error)return '<div class="card">The machine list did not load. Reopen this page when you have a signal.</div>';
   const site=gymInfo();
   const all=Object.values(FLEET.machines);
-  const assigned=all.filter(m=>!m.idMissing).length;
-  return `<article class="mg"><div class="brandbar"><span class="g"></span><span class="r"></span></div><div class="mgbody"><div class="mgword">CREATED</div><h2>Machines</h2><div class="sub">${esc(site.location)} · ${assigned} floor IDs · ${all.length} on the sheet</div><div class="mgweb"><a href="${esc(websiteHref(site.website))}" target="_blank" rel="noopener">${esc(site.website)}</a></div><input id="fleetQ" aria-label="Find a machine" placeholder="Name, nickname, or ID" autocomplete="off" value="${esc(fleetQuery)}" oninput="onFleetQuery(this)"><div id="fleetList">${fleetListHtml(fleetQuery)}</div></div></article>`;
+  return `<article class="mg"><div class="brandbar"><span class="g"></span><span class="r"></span></div><div class="mgbody"><div class="mgword">CREATED</div><h2>Machines</h2><div class="sub">${esc(site.location)} · ${all.length} machines</div><div class="mgweb"><a href="${esc(websiteHref(site.website))}" target="_blank" rel="noopener">${esc(site.website)}</a></div><input id="fleetQ" aria-label="Find a machine" placeholder="Name, nickname, or ID" autocomplete="off" value="${esc(fleetQuery)}" oninput="onFleetQuery(this)"><div id="fleetList">${fleetListHtml(fleetQuery)}</div></div></article>`;
 }
 function loadFleet(){
   fetch('machines.json').then(r=>{if(!r.ok)throw new Error(String(r.status));return r.json()}).then(data=>{
@@ -261,6 +260,7 @@ function applyHashToView(){
   if(view!=='today')override=null;
 }
 function render(){
+  canonicalizeMachineHash();
   const mid=machineIdFromHash();
   if(mid){
     document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));
